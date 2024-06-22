@@ -1,0 +1,5 @@
+{{ range (.Site.GetPage "/tutorial").Pages }}
+<a href="{{ .RelPermalink }}" class="pl-2">
+  {{ .Title }}
+</a>
+{{ end }}

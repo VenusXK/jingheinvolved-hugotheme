@@ -1,0 +1,30 @@
+<div>
+    {{ $key := slice }}
+    {{ $link := dict}}
+    {{ $counter := newScratch }}
+
+    {{ range .Site.RegularPages }}
+        {{ if not .Params.private}}
+        {{ with (.GetTerms "tags") }}
+            {{ range .}}
+
+                {{ if not ($counter.Get .LinkTitle) }}
+                    {{ $counter.Set .LinkTitle 1 }}
+                    {{ $key = $key | append .LinkTitle }}
+                    {{ $link = $link | merge (dict .LinkTitle .RelPermalink) }}
+                {{ else }}
+                    {{ $counter.Add .LinkTitle 1  }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ end }}
+    {{ end }}
+
+
+    {{ range $key  }}
+    <a href="{{ index $link . }}" class="hover:no-underline">
+        <div class="tags">{{ . }}, {{ $counter.Get . }}篇</div>
+    </a>
+    {{ end }}
+</div>
+

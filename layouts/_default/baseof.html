@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+{{ $private := .Params.private }}
+<body>
+
+  
+  <div class="">
+    {{ partial "menu.html" .}}
+  </div>
+  
+  {{ if .IsPage }}
+
+  <div class="max-w-[920px] m-auto mt-24">
+
+  {{ end }}
+
+  {{ if .IsHome }}
+ 
+  <div class="max-w-full m-auto">
+  
+  {{ else }} 
+
+   <div class="max-w-[1180px] m-auto mt-24">
+   
+  {{ end }}
+  
+  {{ block "main" . }}
+  {{ end }}    
+
+  <footer>
+    {{ partial "footer.html" . }}
+  </footer>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+{{ define "main" }}
+<article class="prose prose-stone">
+
+<div class="grid grid-cols-7 sm:grid-cols-1 sm:p-2">
+  <div class="col-span-5 article-main">
+
+    <div>
+      <h1 class="article-title">{{ .Title }}</h1>
+
+      <div class="grid grid-cols-3 my-5">
+        <div class="col-span-2"> 
+            {{/*  <img src="/me.jpg" alt="" class="w-10 rounded-full inline">  */}}
+            <span>发布于</span>
+            <div class="col-span-1 text-right inline w-full">
+              {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+              {{ $dateHuman := .Date | time.Format "2006年1月2日" }}
+              <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+            </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    {{ .Content }}
+
+  </div>
+  <div class="col-span-2 mt-5 sm:hidden">
+    
+    <div class="m-auto ml-10">
+
+      <div class="mb-2">
+        {{ with .Params.from }}
+    
+        {{ range . }}
+          
+                <div class="font-bold">
+                  发布在
+                  <a target="_blank" href="{{ .link }}" style="text-decoration: none;">
+                    {{ with resources.GetMatch  (add "/from/" .site ".svg") }}
+                      <img src={{ .RelPermalink }} alt="" class="inline h-4 px-1">
+                    {{ end }}
+                  </a>
+                </div>
+        {{ end }}
+      {{ end }}
+      </div>
+
+      <div class="mb-2 mt-4  font-bold">
+        文章目录
+      </div>
+      <div class=" w-72 toc">
+        {{ partial "toc.html" .}}
+      </div>
+
+
+      {{ if (.GetTerms "tags") }}
+      <div class="mb-2 mt-4  font-bold">
+        文章标签
+      </div>
+      <div class=" w-fit">
+        {{ partial "tags.html" .}}
+      </div>
+      {{ end }}
+
+    </div>
+
+    </div>
+
+</div>
+
+  
+</article>
+{{ end }}

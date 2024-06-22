@@ -1,0 +1,25 @@
+[markup]
+  [markup.highlight]
+    lineNos = true 
+    lineNumbersInTable = false
+    noHl = true
+    style = 'onesenterprise'
+    tabWidth = 4
+
+[menus]
+  [[menus.main]]
+    name = '首页'
+    pageRef = '/'
+    weight = 10
+  [[menus.main]]
+    name = '文章'
+    pageRef = '/article'
+    weight = 20
+  [[menus.main]]
+    name = '随笔'
+    pageRef = '/short'
+    weight = 30
+  [[menus.main]]
+    name = '关于我'
+    pageRef = '/aboutme'
+    weight = 40

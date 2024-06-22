@@ -1,0 +1,110 @@
+{{ $site := .pages }}
+
+<div class="p-2">    
+    <div class="mr-2">
+        <table id="calendar" class="w-full text-center mt-2" >
+            <tr>
+                {{ range seq -5 0 }}
+                    <th  class="last:bg-gray-100 last:rounded-t-lg">
+                        {{ (time.Now.AddDate 0 0 .) | time.Format "Mon" }}
+                    </th>
+                {{ end }}
+            </tr>
+            <tr>
+                {{ range seq -5 0 }}
+                    {{ $theDate := ((time.Now.AddDate 0 0 .) | time.Format "2006-01-02") }}
+                    {{ $count := (partial "Article_Counts" (dict "pages" $site "theDate" $theDate))  }}
+                    <td class="last:bg-gray-100 last:rounded-b-lg ">
+                        {{ (time.Now.AddDate 0 0 .).Day }}
+                        <br>
+                        <div class="flex h-1 flex-row m-auto w-fit gap-1">
+                            {{ range seq $count }}
+                                <div class="calender-t-ring bg-green-500 "></div>
+                            {{ end }}
+                            </div>
+                    </td>
+                {{ end }}
+            </tr>
+        </table>
+    </div>
+
+    <hr class="mt-2 mx-2">
+
+    <div class="square-month grid grid-rows-7 gap-1  p-3">
+        {{ $x_mon_bef := -3 }}
+        {{ $first_day := (time.Now.AddDate 0 $x_mon_bef 0)}}
+        {{ $flag := 1 }}
+
+        {{/*  把方格子的渲染写入循环，每个循环渲染一个小方格子  */}}
+        {{ range seq 0 (partial "DaysMount_XMonthesBefore.html" (dict "x_mon_bef" $x_mon_bef)) }}
+
+            {{ $theDate := (($first_day.AddDate 0 0 .) | time.Format "2006-01-02") }}
+            {{ $count := (partial "Article_Counts" (dict "pages" $site "theDate" $theDate))  }}
+            {{ $row_start := (($first_day.AddDate 0 0 .).Weekday | int) }}
+            {{ $col_start := div . 7 }}
+            {{ $date_before := $row_start }}
+            
+            {{ if (and (gt $date_before 0) $flag) }}
+
+                {{ range seq 0 $date_before }}
+                    {{ $theDate = ($first_day.AddDate 0 0 (int (sub . $date_before))) | time.Format "2006-01-02" }}
+                    {{ $count := (partial "Article_Counts" (dict "pages" $site "theDate" $theDate))  }}
+                    {{ (partial "Square_Display" (dict "count" $count "theDate" $theDate "row_start" . "isBefore" true ) )}}
+                {{ end }}
+                
+            {{ else }}
+                
+                {{ partial "Square_Display" (dict "count" $count "theDate" $theDate "row_start" $row_start "isBefore" false ) }}
+
+            {{ end }}
+            {{ $flag = 0 }}
+        {{ end }}
+    </div>
+
+</div>
+
+{{ define "partials/DaysMount_XMonthesBefore.html" }}
+    {{ $x_mon_bef := int .x_mon_bef }}
+    {{ $DaysMount := time.Now.Sub (time.Now.AddDate 0 $x_mon_bef 6)}} {{/*  表示当前时间加上给定的量  */}}
+    {{ return (div ($DaysMount).Hours 24) }}
+{{ end }}
+
+
+{{ define "partials/Article_Counts.html" }}
+    {{ $pages := .pages }}
+
+    {{ $theDate := .theDate}}
+    {{ $count := 0 }}
+    
+    {{ range $pages }}
+        {{ if not .Params.private }}
+            {{ $ArticleDate := .Date | time.Format "2006-01-02" }}
+            {{ if (eq $ArticleDate $theDate) }}
+                {{ $count = add $count 1 }}
+                {{ if gt $count 7 }}
+                    {{ $count = 7 }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    
+    {{ return $count }}
+{{ end }}
+
+
+{{ define "partials/Square_Display.html" }}
+    <div class="square overflow-hidden  square-level{{ .count }}" 
+    {{ if .isBefore }}
+    style="grid-row-start: {{ add 1 .row_start }}; grid-column-start: 1">
+    {{ else }}
+    style="grid-row-start:  {{ add 1 .row_start }}">
+    {{ end }}
+
+    <div class="square-tip">
+            {{ .count }}, {{ .theDate }}
+        </div>
+    </div>
+{{ end }}
+
+
+

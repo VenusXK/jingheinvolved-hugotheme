@@ -1,0 +1,48 @@
+
+{{- $page := .page }}
+
+{{ with $page }}
+
+    {{ $thePages :=  where site.RegularPages "Type" "article" }}
+
+    
+    <table class="table-auto">
+      
+      <tr>
+       <th>{{ index .Site.Params.tableTitle 0 }}</th>
+       <th>{{ index .Site.Params.tableTitle 1 }}</th>
+       <th>{{ index .Site.Params.tableTitle 2 }}</th>
+       <th>{{ index .Site.Params.tableTitle 3 }}</th>
+      </tr>
+
+      {{ range $thePages }}
+      {{ if and .Title (not .Params.private) }}
+      
+        <tr>
+
+          <td>
+            <a href="{{ .RelPermalink }}">
+              {{ .LinkTitle }}
+            </a>
+          </td>
+    
+          <td>
+            {{ .Lastmod | time.Format "2006年1月2日" }}
+          </td>
+
+          <td>
+            {{ partial "tags.html" . }}
+          </td>
+
+          <td>
+            <a href="{{ .Parent.RelPermalink }}">{{ .Parent.LinkTitle }}</a>
+          </td>
+
+
+        </tr>
+        {{ end }}
+
+        {{ end }}
+      </table>
+
+{{ end }}

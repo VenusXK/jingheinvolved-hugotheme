@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+
+
+/* site style */
+
+
+body{
+    font-family: 'Noto Sans SC';
+}
+
+.SiteTitle{
+    @apply text-3xl sm:text-lg font-bold uppercase mb-2;
+}
+
+.SiteBase{
+    @apply mx-auto
+}
+
+.SiteMain{
+    @apply min-h-fit  SiteBase rounded-sm 
+}
+
+
+.List_Elem{
+    @apply text-base h-12  -mx-4 px-4 py-1 rounded-lg;
+    @apply hover:bg-gray-100/80;
+}
+
+.List_Elem_Title{
+    @apply mt-2
+}
+
+
+
+
+
+
+
+
+/* article style */
+
+
+.prose table{
+    @apply w-full my-4 outline outline-1 outline-gray-200 rounded-lg overflow-hidden table-fixed
+}
+
+
+.prose tbody tr{
+    @apply odd:bg-gray-50 border-b last:border-b-0 ;
+    text-align: left !important;
+}
+.prose td, .prose th{
+    @apply border-r last:border-r-0
+}
+.article-title{
+    @apply text-4xl font-normal
+}
+p{
+    @apply my-2 p-0
+}
+
+li{
+    @apply pl-0 list-inside;
+}
+
+ul{
+    @apply pl-0  m-0
+}
+
+ul ul{
+    @apply pl-5 m-0 py-0
+}
+
+.summary{
+    @apply text-gray-500
+}
+
+h1, h2, h3, h4{
+    @apply font-bold leading-loose my-3
+}
+
+h1{
+    @apply text-xl mb-1 
+}
+
+.article-date{
+    @apply mb-2
+}
+
+h2{
+    @apply text-lg
+}
+
+h3{
+    @apply text-base
+}
+
+
+.highlight{
+    @apply rounded-lg w-full overflow-x-auto overflow-y-hidden my-2 py-2 border bg-gray-100 !important
+}
+
+p code{
+    @apply tags-no-btn 
+}
+
+.article p, .article div{
+    @apply leading-6 my-2 
+}
+
+.article-main a{
+    @apply text-purple-700
+}
+
+li{
+    @apply my-1
+}
+
+.list table{
+    @apply rounded-lg w-full
+}
+
+.list th{
+    @apply text-left font-medium text-gray-400
+}
+
+.list tr{
+    @apply h-10  even:bg-gray-50
+}
+
+.list td, th{
+    @apply p-2 border-b
+}
+
+.card{
+    @apply border rounded-xl shadow-gray-200 shadow-sm
+}
+
+#calendar th{
+    @apply text-xs text-gray-400 border-none font-light
+}
+
+#calendar td{
+    @apply pb-2 text-sm
+}
+
+.title{
+    @apply font-bold text-xl mb-4 sm:text-center
+}
+
+.prose img{
+    @apply max-h-36 m-auto
+}
+
+.tags-base{
+    @apply w-fit inline bg-gray-50 border rounded-md text-xs whitespace-nowrap leading-8 
+}
+
+.tags{
+    @apply duration-300 shadow-sm hover:bg-gray-100 tags-base mr-1 py-1 px-2 sm:block sm:m-auto sm:leading-4
+}
+
+.tags-no-btn{
+    @apply tags-base py-1 px-1 
+}
+
+.toc li{
+    @apply line-clamp-1
+}
+
+
+
+
+
+
+
+
+/* square stile */
+
+
+
+
+
+
+
+
+
+
+
+
+.square-level1{
+    @apply bg-green-300 shadow-green-500/50  shadow-green-900/50
+}
+
+.square-level2{
+    @apply bg-green-400 shadow-green-600/50  shadow-green-900/50
+}
+
+.square-level3{
+    @apply bg-green-500 shadow-green-700/50  shadow-green-900/50
+}
+
+.square-level4{
+    @apply bg-green-600 shadow-green-800/50  shadow-green-900/50
+}
+
+.square-level5{
+    @apply bg-orange-600 shadow-orange-800/50  shadow-orange-900/50
+}
+
+
+.square-level6{
+    @apply bg-red-500 shadow-red-700/50  shadow-red-900/50
+}
+
+.square-level7{
+    @apply bg-red-600 shadow-black/50  shadow-red-900/50
+}
+
+.square-level0{
+    @apply bg-gray-100 shadow-gray-400/50  shadow-gray-400/50
+}
+
+.square{
+    @apply w-[16px] h-[16px] overflow-visible rounded-sm   border shadow-inner;
+}
+
+.square-tip{
+    @apply  w-24 h-fit p-1 -translate-x-10 -translate-y-10 bg-white shadow-sm  relative top-2 hidden text-xs text-center border rounded-lg
+}
+
+.square:hover .square-tip{
+    @apply block
+}
+
+.calender-t-ring{
+    @apply w-1 h-1 rounded-full
+}
+
+
+
+
+
+/* short */
+
+
+
+
+
+.short a{
+    @apply text-purple-700
+}
+
+.short img{
+    @apply max-w-[200px] inline
+}

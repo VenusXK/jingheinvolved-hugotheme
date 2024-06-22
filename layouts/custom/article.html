@@ -1,0 +1,43 @@
+{{ define "main" }}
+
+    <div>
+
+
+        <div class="">
+            <div class="mb-14">
+
+                <div class="grid grid-cols-10 sm:hidden gap-10">
+                    <div class="col-span-7 sm:col-span-1">
+                        <div class="title sm:text-center">
+                            {{ .Site.Params.articleTitle }}
+                        </div>
+        
+                        <div class="list sm:text-xs">
+                            {{ partial "list_table.html" (dict "page" .) }}
+                        </div>
+                    </div>
+
+                    <div class="col-span-3 sm:col-span-1">
+                        <div class="title">
+                            {{ .Site.Params.calendarTitle }}
+                        </div>
+                
+                        {{ $thePages :=  where site.RegularPages "Type" "article" }}
+                        <div class="w-full card h-fit sm:w-80 sm:m-auto">
+                            {{ partial "calendar.html" (dict "pages" $thePages )}}
+                        </div>
+                        <div class="title mt-5">
+                            {{ .Site.Params.tagsTitle }}
+                        </div>
+                
+                        <div class="w-full">
+                            {{ partial "tags_sum.html" .}}
+                            
+                        </div>
+                    </div>
+                </div>                
+            </div>
+
+        </div>
+    </div>
+{{ end }}

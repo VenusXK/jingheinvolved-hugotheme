@@ -1,0 +1,13 @@
+{{ define "main" }}
+    {{ if not .IsHome }}
+    
+    <div class="title">
+        {{.Title}} 相关文章
+    </div>
+
+    {{ end }}
+
+    <div class="list">
+        {{ partial "list_table.html" (dict "page" .) }}
+    </div>
+{{ end }}

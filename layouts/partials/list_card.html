@@ -1,0 +1,30 @@
+
+{{- $pages := .pages }}
+
+
+<div class="grid grid-cols-12 gap-4 sm:grid-cols-1 sm:mx-2">
+    {{ range $pages }}
+
+    {{ if and .Title (.Params.private) }}
+        
+        
+            <a href="{{ .RelPermalink }}" class=" col-span-2 ">
+                <div class="rounded-xl bg-gray-100 border p-3 h-32 w-full shadow-sm hover:shadow-md duration-300 ">
+                    <div class="font-bold text-lg h-1/2 overflow-hidden">
+                        {{ .LinkTitle }}
+                    </div>
+                    <div class="w-full h-1/4"></div>
+                    <div class="h-1/4 text-sm">
+                        {{ .Lastmod | time.Format "2006年1月2日" }}
+                    </div>
+                </div>
+
+            </a>
+
+    {{ end }}
+    {{ end }}
+
+</div>
+
+
+
