@@ -1,0 +1,47 @@
+{{ define "main" }}
+
+<div class="bg-black w-full h-full text-white translate-x-4">
+
+{{ range where .Site.RegularPages "Type" "photography" }}
+<div>
+    <div class="font-bold text-xl mb-4">{{ .Title }}</div>
+    <div class="flex">
+        {{ $COL_NUM := 4 }}
+        {{ $para_data := .Params.data}}
+        {{ range $col_num := (seq 0 (sub $COL_NUM 1)) }}
+            <div class="flex flex-col w-1/4 mr-8">
+                {{ range $index, $data := $para_data  }}
+                    {{ if (eq (mod $index $COL_NUM) $col_num)}}
+                    {{ partial "photography-colomn.html" (dict "data" . ) }}
+                    {{ end }}
+                {{ end }}
+            </div>
+        {{ end }}
+    </div>
+    </div>
+</div>
+{{ end }}
+
+</div>
+{{ end }}
+
+
+{{ define "partials/photography-colomn.html" }}
+{{ $data := .data }}
+<div class=" h-fit overflow-hidden shadow-lg  mb-4">
+    <img src="{{ $data.image }}" alt="" class="w-full rounded-lg hover:brightness-50 duration-300">
+    <div class="w-full h-fit mt-2 ">
+        <div class="mb-1">
+            {{ $data.description }}
+        </div>
+        <div class="text-xs opacity-60">
+            <div class="line-clamp-1 hover:line-clamp-none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3 -translate-y-[1px] inline">
+                    <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0ZM9 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6.75 8a.75.75 0 0 0 0 1.5h.75v1.75a.75.75 0 0 0 1.5 0v-2.5A.75.75 0 0 0 8.25 8h-1.5Z" clip-rule="evenodd" />
+                  </svg>
+                  {{ range $data.people }}{{.person}}({{.position}})，{{ end }}拍摄于{{ $data.time | time.Format "2006年1月2日" }}，地点为{{ $data.position }}
+            </div>                        
+        </div>
+    </div>
+</div>
+{{ end }}

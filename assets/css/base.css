@@ -14,9 +14,8 @@
 
 
 body{
-    font-family: 'Noto Sans SC';
+    @apply overflow-y-scroll
 }
-
 .SiteTitle{
     @apply text-3xl sm:text-lg font-bold uppercase mb-2;
 }
@@ -85,7 +84,7 @@ ul ul{
 }
 
 h1, h2, h3, h4{
-    @apply font-bold leading-loose my-3
+    @apply  leading-loose my-3
 }
 
 h1{
@@ -97,11 +96,11 @@ h1{
 }
 
 h2{
-    @apply text-lg
+    @apply text-2xl border-b
 }
 
 h3{
-    @apply text-base
+    @apply text-xl
 }
 
 
@@ -154,7 +153,7 @@ li{
 }
 
 .title{
-    @apply font-bold text-xl mb-4 sm:text-center
+    @apply text-xl mb-4 sm:text-center
 }
 
 .prose img{
@@ -166,7 +165,7 @@ li{
 }
 
 .tags{
-    @apply duration-300 shadow-sm hover:bg-gray-100 tags-base mr-1 py-1 px-2 sm:block sm:m-auto sm:leading-4
+    @apply duration-300 shadow-sm hover:shadow-none hover:bg-gray-100/60 tags-base mr-1 py-1 px-2 sm:block sm:m-auto sm:leading-4
 }
 
 .tags-no-btn{

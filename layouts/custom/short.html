@@ -2,16 +2,38 @@
 
 {{ $thePages :=  where site.RegularPages "Type" "short" }}
 
-<div class="shadow-sm rounded-lg border short">
-{{ range $thePages }}
-{{ $dateHuman := .Date | time.Format "2006年1月2日" }}
-<div class="hover:bg-gray-100 p-5  border-b last:border-none">
-    <div class="w-full">
-        <h2 class="inline">{{ .Title }}</h2>
-        {{ with .Params.from }}
+<div class=" short flex  flex-row">
+
+{{ $COL_NUM := 4 }}
+
+{{ range $col_num := (seq 0 (sub $COL_NUM 1)) }}
+<div class="flex flex-col w-1/4 px-2">
+    {{ range $index, $thepage := $thePages }}
+        {{ if (eq (mod $index $COL_NUM) $col_num)}}
+        {{ partial "short-colomn.html" (dict "thepage" $thepage ) }}
+        {{ end }}
+    {{ end }}
+</div>
+{{ end }}
+
+
+
+</div>
+
+{{ end }}
+
+
+
+{{ define "partials/short-colomn.html" }}
+{{ $thepage := .thepage }}
+<div class="hover:bg-gray-100 duration-300 p-4 rounded-lg border mb-4 shadow-sm">
+    <div class="text-lg font-bold">{{ $thepage.Title }}</div>
+    
+    <div class="h-6">
+        <div class="float-left text-sm pt-1">{{ $thepage.Date | time.Format "2006年1月2日" }}</div>
+        {{ with $thepage.Params.from }}
             {{ range . }}
-                <div class="inline float-right">
-                    发布在
+                <div class="float-right">
                     <a target="_blank" href="{{ .link }}" style="text-decoration: none;">
                     {{ with resources.GetMatch  (add "/from/" .site ".svg") }}
                         <img src={{ .RelPermalink }} alt="" class="inline h-4 px-1">
@@ -20,15 +42,11 @@
                 </div>
             {{ end }}
         {{ end }}
-        <div class="inline float-right pr-2">{{ $dateHuman }}</div>
     </div>
 
-    <div class="content">
-        {{ .Content }}
+    <div class="content text-justify  line-clamp-[8] hover:line-clamp-none " >
+        {{ $thepage.Content }}
     </div>
-</div>
 
-{{ end }}
 </div>
-
 {{ end }}

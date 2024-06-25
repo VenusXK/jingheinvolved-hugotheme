@@ -1,29 +1,45 @@
 
 {{ $currentPage := . }}
 
-<div class="absolute w-full top-0  z-10  opacity-50 hover:opacity-100 duration-300
-{{ if not .IsHome}}
-border-b
+
+<div class="absolute w-full top-0  z-10  opacity-50 hover:opacity-100 duration-300  bg-gradient-to-b
+{{ if (eq .Layout "photography")}}
+text-white
+{{ else }}
+{{ if not $currentPage.IsHome }} hover:from-gray-200 from-gray-100 {{ end }}
 {{ end }}
 ">
 
-  <div class="h-12 flex justify-center ">
+  <div class="h-24 flex justify-center gap-x-1">
     {{ with site.Menus.main }}
   
-    <nav class="menu self-center flex gap-x-6">
+    <nav class="menu self-center flex">
       {{ range . }}
       
   
       <a href="{{ .URL }}"  >
-        <div class="flex gap-1 ">
+        <div>
+          
   
           {{ if $currentPage.IsMenuCurrent .Menu . }}
   
-            <span class="active font-bold" aria-current="page" href="{{ .URL }}">{{ .Name }}</span>
+            <span class=" py-2 px-4 active font-bold
+            {{ if (eq $currentPage.Layout "photography") }}
+            border-b-2 border-white 
+            {{ else }}
+            {{ if not $currentPage.IsHome }} border-b-2 border-black {{ end }}
+            {{ end }}
+            " aria-current="page" href="{{ .URL }}">{{ .Name }}</span>
   
           {{ else }}
               
-              <span class="duration-300" href="{{ .URL }}">{{ .Name }}</span>
+              <span class=" py-2 px-4 duration-300
+              {{ if (eq $currentPage.Layout "photography")}}
+              hover:bg-stone-800
+              {{ else }}
+              {{ if not $currentPage.IsHome }} hover:bg-gray-200 {{ end }}
+              {{ end }}
+              " href="{{ .URL }}">{{ .Name }}</span>
           
           {{ end }}
   

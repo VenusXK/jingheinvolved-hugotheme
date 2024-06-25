@@ -4,7 +4,12 @@
   {{ partial "head.html" . }}
 </head>
 {{ $private := .Params.private }}
-<body>
+<body
+{{ if (eq .Layout "photography")}}
+    class="bg-black"
+{{ end }}
+
+>
 
   
   <div class="">
@@ -12,21 +17,12 @@
   </div>
   
   {{ if .IsPage }}
+    <div class="max-w-[920px] m-auto mt-24">
+    {{ end }}
 
-  <div class="max-w-[920px] m-auto mt-24">
 
-  {{ end }}
-
-  {{ if .IsHome }}
- 
-  <div class="max-w-full m-auto">
-  
-  {{ else }} 
-
-   <div class="max-w-[1180px] m-auto mt-24">
-   
-  {{ end }}
-  
+    <div class="max-w-[1180px] m-auto mt-24">
+      
   {{ block "main" . }}
   {{ end }}    
 

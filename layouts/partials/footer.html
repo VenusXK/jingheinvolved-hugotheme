@@ -2,25 +2,12 @@
     "mail" (slice "icons8-gmail-logo-94" "mailto:venusxk6214@gmail.com")
 -}}
 
-    <div class="max-w-[1180px]  m-auto mt-10 mb-4 sm:text-center">
-        {{/*  <div class="h-fit pb-2 pt-5">
-
-            <div >
-                <div class="font-bold py-1">
-                    联系方式
-                </div>
-                <div class="flex gap-2">
-                    {{ range $key, $value := $contact }}
-                        {{ with resources.GetMatch  ( add "icons/" ( add (index $value 0) ".png")) }}
-                            <a href="{{ index $value 1}}" target="_blank">
-                                <img src="{{ .RelPermalink }}" class="w-8">
-                            </a>
-                        {{ end }} 
-                    {{ end }}
-                </div>
-            </div>
-            
-        </div>  */}}
+    <div class="max-w-[1180px]  m-auto mt-10 mb-4 sm:text-center
+    
+    {{ if (eq .Layout "photography")}}
+    text-white
+{{ end }}
+    ">
         <div class=" h-fit text-xs">
             <div class="mb-1">
                 Copyright © 2024 Jinghe Zhang  All rights reserved.
