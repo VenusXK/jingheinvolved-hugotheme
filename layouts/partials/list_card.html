@@ -2,7 +2,7 @@
 {{- $pages := .pages }}
 
 
-<div class="grid grid-cols-6 gap-4 sm:grid-cols-1 sm:mx-2">
+<div class="grid grid-cols-8 gap-2 sm:grid-cols-1 sm:mx-2">
     {{ range $pages }}
 
     {{ if and .Title (.Params.private) }}
@@ -13,7 +13,7 @@
                     <div class="text-xl line-clamp-2 h-14 ">
                         {{ .LinkTitle }}
                     </div>
-                    <div class="w-full h-1/4"></div>
+                    <div class="w-full h-1/6"></div>
                     <div class="h-1/4 text-sm">
                         {{ .Lastmod | time.Format "2006年1月2日" }}
                     </div>

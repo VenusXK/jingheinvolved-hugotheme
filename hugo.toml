@@ -23,10 +23,7 @@
     name = '相册'
     pageRef = '/photography'
     weight = 40
-  [[menus.main]]
-    name = '杂记'
-    pageRef = '/miscellany'
-    weight = 50
+
   [[menus.main]]
     name = '关于我'
     pageRef = '/aboutme'
